@@ -1,4 +1,4 @@
-name: Run Tests Backend
+name: Run Tests
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -26,8 +26,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r backend/requirements.txt
+          pip install -r backend/requirements.txt  # Ajusta el path según tu proyecto
 
       - name: Run tests
-        working-directory: backend
+        env:
+          SQL_URL: ${{ secrets.SQL_URL }}
         run: pytest backend/app/tests --maxfail=5 --disable-warnings
