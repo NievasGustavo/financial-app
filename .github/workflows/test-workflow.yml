@@ -32,4 +32,4 @@ jobs:
         working-directory: backend
         env:
           SQL_URL: ${{ secrets.SQL_URL }}
-        run: pytest backend/app/tests --maxfail=5 --disable-warnings
+        run: pytest app/tests --maxfail=5 --disable-warnings
