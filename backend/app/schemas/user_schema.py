@@ -13,7 +13,7 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
-    class ConfigDict:
+    class Config:
         from_attributes = True
 
 
@@ -29,5 +29,5 @@ class UserUpdate(BaseModel):
 class UserResponse(UserBase):
     id: UUID4
 
-    class ConfigDict:
+    class Config:
         from_attributes = True
