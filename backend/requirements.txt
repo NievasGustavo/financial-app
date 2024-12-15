@@ -3,3 +3,8 @@ sqlmodel==0.0.22
 alembic==1.14.0
 pytest
 psycopg2
+bcrypt
+pydantic
+sqlmodel
+sqlalchemy
+dotenv
