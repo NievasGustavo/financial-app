@@ -1,10 +1,6 @@
 fastapi[standard]==0.115.5
 sqlmodel==0.0.22
 alembic==1.14.0
-pytest
-psycopg2
-bcrypt
-pydantic
-sqlmodel
-sqlalchemy
-dotenv
+python-dotenv==1.0.1
+psycopg2==2.9.10
+bcrypt==4.2.1

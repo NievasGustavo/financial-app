@@ -30,9 +30,25 @@ async def get_user_by_id(user_id: UUID, session: SessionDep) -> UserResponse:
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)) from e
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=UserResponse, status_code=status.HTTP_201_CREATED,
+             responses={
+                 400: {
+                     "description": "Bad Request - El correo electrónico o el nombre de usuario ya existe en la base de datos.",
+                     "content": {
+                         "application/json": {
+                             "example": {
+                                 "detail": "Email already exists"
+                             }
+                         }
+                     }
+                 }
+             })
 async def create_user(user: UserCreate, session: SessionDep) -> UserResponse:
-    return user_services.create_user(user, session)
+    try:
+        return user_services.create_user(user, session)
+    except SQLAlchemyError as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)) from e
 
 
 @router.patch("/{user_id}")

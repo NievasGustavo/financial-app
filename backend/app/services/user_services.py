@@ -29,6 +29,12 @@ def create_user(user_data: UserCreate, session: SessionDep) -> UserResponse:
     db_user.password = bcrypt.hashpw(
         db_user.password.encode("utf-8"), bcrypt.gensalt()
     )
+    if session.exec(select(User).where(User.email == db_user.email)).first():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Email already exists")
+    if session.exec(select(User).where(User.username == db_user.username)).first():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Username already exists")
     session.add(db_user)
     session.commit()
     session.refresh(db_user)
