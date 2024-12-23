@@ -13,8 +13,9 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
-    class Config:
-        from_attributes = True
+    model_config = {
+        "from_attributes": True
+    }
 
 
 class UserUpdate(BaseModel):
@@ -29,5 +30,6 @@ class UserUpdate(BaseModel):
 class UserResponse(UserBase):
     id: UUID4
 
-    class Config:
-        from_attributes = True
+    model_config = {
+        "from_attributes": True
+    }
