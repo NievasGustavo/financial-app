@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError
 from ..db.session import SessionDep
 from ..services import user_services
-from ..schemas.user_schema import UserCreate, UserResponse
+from ..schemas.user_schema import UserCreate, UserResponse, UserUpdate
 
 router = APIRouter(
     prefix="/users",
@@ -52,7 +52,7 @@ async def create_user(user: UserCreate, session: SessionDep) -> UserResponse:
 
 
 @router.patch("/{user_id}")
-async def update_user(user_id: UUID, user: UserCreate, session: SessionDep) -> UserResponse:
+async def update_user(user_id: UUID, user: UserUpdate, session: SessionDep) -> UserResponse:
     try:
         return user_services.update_user(user_id, user, session)
     except SQLAlchemyError as e:
