@@ -15,7 +15,7 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
 
 
-@router.post("/token", responses={
+@router.post("/login", responses={
     400: {
         "description": "Incorrect username or password",
         "content": {
