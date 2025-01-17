@@ -26,6 +26,10 @@ class UserUpdate(BaseModel):
     age: Optional[int] = None
     password: Optional[str] = None
 
+    model_config = {
+        "from_attributes": True
+    }
+
 
 class UserResponse(UserBase):
     id: UUID4

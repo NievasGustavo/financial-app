@@ -7,10 +7,10 @@ from app.db.session import engine
 from dotenv import load_dotenv
 from alembic import context
 from os import getenv
-load_dotenv()
 
 config = context.config
-config.set_main_option('sqlalchemy.url', getenv("SQL_URL"))
+load_dotenv(override=True)
+config.set_main_option("sqlalchemy.url", getenv("SQL_URL"))
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
